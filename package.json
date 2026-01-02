@@ -1,5 +1,27 @@
 {
   "dependencies": {
-    "express": "^5.2.1"
-  }
+    "express": "^5.2.1",
+    "firebase": "^12.7.0",
+    "firebase-admin": "^13.6.0"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SowmyaT-157/new-todo-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SowmyaT-157/new-todo-backend/issues"
+  },
+  "homepage": "https://github.com/SowmyaT-157/new-todo-backend#readme",
+  "description": ""
 }

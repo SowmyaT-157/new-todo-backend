@@ -5,6 +5,7 @@
     "firebase": "^12.7.0",
     "firebase-admin": "^13.6.0",
     "router": "^2.2.0",
+    "supertest": "^7.1.4",
     "ts-jest": "^29.4.6"
   },
   "name": "backend",
@@ -28,6 +29,7 @@
   "homepage": "https://github.com/SowmyaT-157/new-todo-backend#readme",
   "description": "",
   "devDependencies": {
+    "@types/supertest": "^6.0.3",
     "jest": "^30.2.0"
   }
 }

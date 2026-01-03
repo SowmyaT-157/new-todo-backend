@@ -47,7 +47,13 @@ describe("it should check the all the methods are working properly", () => {
         expect(response.status).toBe(201);
         expect(mockAddTask).toHaveBeenCalledWith(newTask);
     });
-
+    it("it should return a 500 if internal server error when task not created", async () => {
+        const newTask = { title: "breakfast" };
+        mockAddTask.mockRejectedValue(new Error("Invalid data"));
+        const response = await request(app).post("/").send(newTask);
+        expect(response.status).toBe(500);
+        expect(response.body.message).toBe("internal server issue");
+    });
 
 
 })

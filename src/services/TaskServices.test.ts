@@ -22,7 +22,7 @@ jest.mock("../config/Firebase.ts", () => ({
 }))
 
 import TaskType from "../types/TaskType";
-import { addTheTask, getTheTask } from "./TaskServices";
+import { addTheTask, getTheTask, removeTheTask } from "./TaskServices";
 
 const MockData: TaskType = {
     id: "1",
@@ -43,10 +43,18 @@ describe("it should check all functionalities are working properly", () => {
     });
     test(" it should check the get method all the tasks are returned properly", async () => {
         mockGet.mockResolvedValue({
-            docs: [{ data: () => MockData}],
+            docs: [{ data: () => MockData }],
         });
         const tasks = await getTheTask();
         expect(mockGet).toHaveBeenCalledTimes(1);
     });
-    
+
+    it("Should remove task it delete a task by using its id", async () => {
+        const taskId = MockData.id;
+        mockDelete.mockResolvedValue(undefined);
+        await removeTheTask(taskId);
+        expect(mockDoc).toHaveBeenCalledWith(taskId);
+        expect(mockDelete).toHaveBeenCalledTimes(1);
+    });
+
 })

@@ -15,3 +15,8 @@ export const getTheTask = async () => {
     return tasks
 }
 
+export const removeTheTask = async (id: string) => {
+    const deleteTheTask = await collectionTask.doc(id).delete()
+    return deleteTheTask
+}
+

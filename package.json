@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/jest": "^30.0.0",
     "express": "^5.2.1",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.6.0",

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { addTheTask, getTheTask } from "../services/TaskServices"
+import { addTheTask, getTheTask, removeTheTask } from "../services/TaskServices"
 
 export const addTask = async (req: Request, res: Response) => {
     try {
@@ -24,6 +24,20 @@ export const getTask = async (req: Request, res: Response) => {
             return res.status(200).json({ message: "successfully get the all tasks" })
         } else {
             return res.status(400).json({ message: "Bad Request" })
+        }
+    } catch {
+        return res.status(500).json({ message: "internal server error" })
+    }
+}
+
+export const taskDelete = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const tasks = await removeTheTask(id)
+        if (id) {
+            return res.status(200).json({ message: "successfully deleted the task" })
+        } else {
+            return res.status(400).json({ message: "bad request, didn't match any id" })
         }
     } catch {
         return res.status(500).json({ message: "internal server error" })

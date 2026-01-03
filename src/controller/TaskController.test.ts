@@ -47,13 +47,22 @@ describe("it should check the all the methods are working properly", () => {
         expect(response.status).toBe(201);
         expect(mockAddTask).toHaveBeenCalledWith(newTask);
     });
-    it("it should return a 500 if internal server error when task not created", async () => {
+    test("it should return a 500 if internal server error when task not created", async () => {
         const newTask = { title: "breakfast" };
         mockAddTask.mockRejectedValue(new Error("Invalid data"));
         const response = await request(app).post("/").send(newTask);
         expect(response.status).toBe(500);
         expect(response.body.message).toBe("internal server issue");
     });
+    test("it should delete the task when the task is found ", async () => {
+      const taskId = "1";
+      mockRemoveTask.mockResolvedValue({ success: true });
+      const response = await request(app).delete(`/${taskId}`);
+      expect(response.status).toBe(200);
+      expect(response.body.message).toBe("successfully deleted the task");
+      expect(mockRemoveTask).toHaveBeenCalledWith(taskId);
+    });
+
 
 
 })

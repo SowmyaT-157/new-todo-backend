@@ -17,7 +17,7 @@ app.use(express.json());
 app.post('/', addTask)
 app.get('/', getTask)
 app.delete('/:id', taskDelete)
-app.put('/:id', editTask)
+app.put('/taskEdit/:id', editTask)
 
 describe("it should check the all the methods are working properly", () => {
     beforeEach(() => {
@@ -55,12 +55,19 @@ describe("it should check the all the methods are working properly", () => {
         expect(response.body.message).toBe("internal server issue");
     });
     test("it should delete the task when the task is found ", async () => {
-      const taskId = "1";
-      mockRemoveTask.mockResolvedValue({ success: true });
-      const response = await request(app).delete(`/${taskId}`);
-      expect(response.status).toBe(200);
-      expect(response.body.message).toBe("successfully deleted the task");
-      expect(mockRemoveTask).toHaveBeenCalledWith(taskId);
+        const taskId = "1";
+        mockRemoveTask.mockResolvedValue({ success: true });
+        const response = await request(app).delete(`/${taskId}`);
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe("successfully deleted the task");
+        expect(mockRemoveTask).toHaveBeenCalledWith(taskId);
+    });
+    test("it should show a 400 status code if the edit task id not match )", async () => {
+        mockUpdateTask.mockResolvedValue(null);
+        const response = await request(app)
+            .put("/taskEdit/1")
+            .send({ title: "Updated Title" });
+        expect(response.body.message).toBe("bad request");
     });
 
 

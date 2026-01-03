@@ -3,7 +3,8 @@
     "express": "^5.2.1",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.6.0",
-    "router": "^2.2.0"
+    "router": "^2.2.0",
+    "ts-jest": "^29.4.6"
   },
   "name": "backend",
   "version": "1.0.0",
@@ -24,5 +25,8 @@
     "url": "https://github.com/SowmyaT-157/new-todo-backend/issues"
   },
   "homepage": "https://github.com/SowmyaT-157/new-todo-backend#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
 }

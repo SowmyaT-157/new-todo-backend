@@ -20,3 +20,13 @@ export const removeTheTask = async (id: string) => {
     return deleteTheTask
 }
 
+export const editTheTask = async (id: string,data:TaskType) => {
+    const task = await collectionTask.get()
+    const tasks = task.docs.find((doc) => doc.id === id)
+    if (!tasks) {
+        return "any task is not available to this id"
+    } else {
+        return collectionTask.doc(id).update(data)
+    }
+}
+

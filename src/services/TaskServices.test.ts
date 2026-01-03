@@ -22,7 +22,7 @@ jest.mock("../config/Firebase.ts", () => ({
 }))
 
 import TaskType from "../types/TaskType";
-import { addTheTask, getTheTask, removeTheTask } from "./TaskServices";
+import { addTheTask, editTheTask, getTheTask, removeTheTask } from "./TaskServices";
 
 const MockData: TaskType = {
     id: "1",
@@ -49,12 +49,33 @@ describe("it should check all functionalities are working properly", () => {
         expect(mockGet).toHaveBeenCalledTimes(1);
     });
 
-    it("Should remove task it delete a task by using its id", async () => {
+    test("it should remove task delete a task by using id", async () => {
         const taskId = MockData.id;
         mockDelete.mockResolvedValue(undefined);
         await removeTheTask(taskId);
         expect(mockDoc).toHaveBeenCalledWith(taskId);
         expect(mockDelete).toHaveBeenCalledTimes(1);
     });
+    test("it should edit the data, if already existing id we can edit that task", async () => {
+        const taskId = MockData.id;
+        const updatedData = { ...MockData, name: "Coffee" };
+        mockGet.mockResolvedValue({
+            docs: [{ data: () => MockData, id: taskId }],
+        });
+        mockUpdate.mockResolvedValue(undefined);
+        await editTheTask(taskId, updatedData);
+        expect(mockGet).toHaveBeenCalledTimes(2);
+        expect(mockDoc).toHaveBeenCalledWith(taskId);
+        expect(mockUpdate).toHaveBeenCalledWith(updatedData);
+    });
+    it("Should show a non existend id, if user try to update a non existing id", async () => {
+        const idNotFound = "id not matched to the any task";
+        mockGet.mockResolvedValue({
+            docs: [{ data: () => MockData, id: MockData.id }],
+        });
+        const result = await editTheTask(idNotFound, MockData);
+        expect(mockGet).toHaveBeenCalledTimes(3);
+    });
+
 
 })

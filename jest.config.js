@@ -4,8 +4,15 @@ const tsJestTransformCfg = createDefaultPreset().transform;
 
 /** @type {import("jest").Config} **/
 module.exports = {
+  preset: "ts-jest",
   testEnvironment: "node",
+  verbose: true,
   transform: {
     ...tsJestTransformCfg,
   },
+   testPathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/",
+    "src/config/firebase.test.ts",
+  ],
 };

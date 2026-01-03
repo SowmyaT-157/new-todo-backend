@@ -32,6 +32,21 @@ describe("it should check the all the methods are working properly", () => {
         expect(response.body.message).toBe("successfully get the all tasks");
         expect(mockGetTheTask).toHaveBeenCalledTimes(1);
     });
+    test("it should return a 400 status code if the tasks are not returned", async () => {
+        mockGetTheTask.mockResolvedValue(null);
+        const response = await request(app).get("/");
+        expect(response.status).toBe(400);
+    });
+    test("it should show a 201 status code if new task added successfully", async () => {
+        const newTask = { title: "biryani" };
+        mockAddTask.mockResolvedValue({ id: "2", ...newTask });
+        const response = await request(app)
+            .post("/")
+            .send(newTask)
+            .expect("Content-Type", /json/);
+        expect(response.status).toBe(201);
+        expect(mockAddTask).toHaveBeenCalledWith(newTask);
+    });
 
 
 

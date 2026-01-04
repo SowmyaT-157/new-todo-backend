@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/jest": "^30.0.0",
+    "cors": "^2.8.5",
     "express": "^5.2.1",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.6.0",
@@ -29,6 +30,7 @@
   "homepage": "https://github.com/SowmyaT-157/new-todo-backend#readme",
   "description": "",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/supertest": "^6.0.3",
     "jest": "^30.2.0"
   }

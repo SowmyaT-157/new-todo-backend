@@ -3,3 +3,4 @@ dist/
 firebaseToken.json
 
 coverage/
+.env

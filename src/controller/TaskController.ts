@@ -21,7 +21,7 @@ export const getTask = async (req: Request, res: Response) => {
         const getAllTask = await getTheTask()
         console.log("get the tasks list", getAllTask)
         if (getAllTask) {
-            return res.status(200).json({ message: "successfully get the all tasks" })
+            return res.status(200).json({ message: "successfully get the all tasks",getAllTask })
         } else {
             return res.status(400).json({ message: "Bad Request" })
         }
